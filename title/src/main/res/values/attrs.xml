@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="TitleView">
+        <attr name="titleText" format="reference|string"/>
+        <attr name="leftText" format="reference|string"/>
+        <attr name="rightText" format="reference|string"/>
+        <attr name="titleTextColor" format="reference|color"/>
+        <attr name="leftTextColor" format="reference|color"/>
+        <attr name="rightTextColor" format="reference|color"/>
+        <attr name="titleTextSize" format="dimension"/>
+        <attr name="leftTextSize" format="dimension"/>
+        <attr name="rightTextSize" format="dimension"/>
+        <attr name="leftDrawable" format="reference"/>
+        <attr name="rightDrawable" format="reference"/>
+        <attr name="titleDrawable" format="reference"/>
+        <attr name="titleViewHeight" format="dimension"/>
+    </declare-styleable>
+</resources>
