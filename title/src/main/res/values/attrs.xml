@@ -14,5 +14,10 @@
         <attr name="rightDrawable" format="reference"/>
         <attr name="titleDrawable" format="reference"/>
         <attr name="titleViewHeight" format="dimension"/>
+        <attr name="titleViewBgColor" format="reference|color"/>
+        <attr name="leftMarginLeft" format="dimension"/>
+        <attr name="leftMarginRight" format="dimension"/>
+        <attr name="rightMarginLeft" format="dimension"/>
+        <attr name="rightMarginRight" format="dimension"/>
     </declare-styleable>
 </resources>

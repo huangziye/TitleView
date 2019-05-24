@@ -33,21 +33,92 @@ dependencies {
 
 
 ```xml
- <com.hzy.title.TitleView
-     android:id="@+id/titleView"
-     android:layout_width="match_parent"
-     android:layout_height="?attr/actionBarSize"
-     app:leftText=""
-     app:titleText="@string/app_name"
-     app:rightText=""
-     app:titleTextColor="@android:color/white"
-     app:leftTextColor="@android:color/white"
-     app:rightTextColor="@android:color/white"
-     app:leftTextSize="20dp"
-     app:rightTextSize="20dp"
-     app:titleTextSize="20dp"/>
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".MainActivity">
+
+    <com.hzy.title.TitleView
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:leftText="Left"
+            app:titleText="@string/app_name"
+            app:rightText="Right"
+            app:titleTextColor="@android:color/white"
+            app:leftTextColor="@android:color/white"
+            app:rightTextColor="@android:color/white"
+            app:leftTextSize="16dp"
+            app:rightTextSize="16dp"
+            app:titleTextSize="18dp"
+            app:leftDrawable="@mipmap/ic_back"
+            app:leftMarginLeft="0dp"
+            app:leftMarginRight="0dp"
+            app:rightMarginLeft="0dp"
+            app:rightMarginRight="0dp"/>
+    <com.hzy.title.TitleView
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:leftText="Left"
+            app:titleText="@string/app_name"
+            app:rightText=""
+            app:titleTextColor="@android:color/white"
+            app:leftTextColor="@android:color/white"
+            app:rightTextColor="@android:color/white"
+            app:leftTextSize="16dp"
+            app:rightTextSize="16dp"
+            app:titleTextSize="18dp"
+            app:leftDrawable="@mipmap/ic_back"/>
+    <com.hzy.title.TitleView
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:leftText=""
+            app:titleText="@string/app_name"
+            app:rightText=""
+            app:titleTextColor="@android:color/white"
+            app:leftTextColor="@android:color/white"
+            app:rightTextColor="@android:color/white"
+            app:leftTextSize="16dp"
+            app:rightTextSize="16dp"
+            app:titleTextSize="18dp"
+            app:leftDrawable="@mipmap/ic_back"/>
+    <com.hzy.title.TitleView
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:leftText=""
+            app:titleText="@string/app_name"
+            app:rightText=""
+            app:titleTextColor="@android:color/white"
+            app:leftTextColor="@android:color/white"
+            app:rightTextColor="@android:color/white"
+            app:leftTextSize="16dp"
+            app:rightTextSize="16dp"
+            app:titleTextSize="18dp"/>
+    <com.hzy.title.TitleView
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:leftText=""
+            app:titleText="@string/app_name"
+            app:rightText=""
+            app:titleTextColor="@android:color/white"
+            app:leftTextColor="@android:color/white"
+            app:rightTextColor="@android:color/white"
+            app:titleViewBgColor="@color/colorAccent"
+            app:leftTextSize="16dp"
+            app:rightTextSize="16dp"
+            app:titleTextSize="18dp"/>
+
+</LinearLayout>
 ```
 
+
+### 预览图
+
+![预览图](screenshot/titleview.png)
 
 
 

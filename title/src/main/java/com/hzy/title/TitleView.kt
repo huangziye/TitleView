@@ -7,17 +7,18 @@ import android.util.AttributeSet
 import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
+import android.widget.RelativeLayout
 import androidx.annotation.ColorInt
-import androidx.annotation.DrawableRes
-import androidx.appcompat.widget.Toolbar
+import androidx.core.content.ContextCompat
 import kotlinx.android.synthetic.main.title_view.view.*
 
 /**
- *
+ * 自定义title标题栏
  * @author: ziye_huang
  * @date: 2019/2/18
  */
-class TitleView : Toolbar, View.OnClickListener {
+open class TitleView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) :
+    RelativeLayout(context, attrs, defStyleAttr), View.OnClickListener {
     /**
      *
      */
@@ -33,19 +34,17 @@ class TitleView : Toolbar, View.OnClickListener {
     private var mLeftTextSize: Int
     private var mRightTextSize: Int
     private var mTitleTextSize: Int
-    @DrawableRes
     private var mLeftDrawable: Drawable? = null
-    @DrawableRes
     private var mRightDrawable: Drawable? = null
-    @DrawableRes
     private var mTitleDrawable: Drawable? = null
+    @ColorInt
+    private var mTitleViewBgColor: Int
+    private var mLeftMarginLeft: Int
+    private var mLeftMarginRight: Int
+    private var mRightMarginLeft: Int
+    private var mRightMarginRight: Int
 
-    @JvmOverloads
-    constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) : super(
-        context,
-        attrs,
-        defStyleAttr
-    ) {
+    init {
         LayoutInflater.from(context).inflate(R.layout.title_view, this)
         val typedArray = context.obtainStyledAttributes(attrs, R.styleable.TitleView)
         mLeftText = typedArray.getString(R.styleable.TitleView_leftText)
@@ -60,12 +59,20 @@ class TitleView : Toolbar, View.OnClickListener {
         mLeftDrawable = typedArray.getDrawable(R.styleable.TitleView_leftDrawable)
         mRightDrawable = typedArray.getDrawable(R.styleable.TitleView_rightDrawable)
         mTitleDrawable = typedArray.getDrawable(R.styleable.TitleView_titleDrawable)
+        mTitleViewBgColor = typedArray.getColor(
+            R.styleable.TitleView_titleViewBgColor,
+            ContextCompat.getColor(context, R.color.defaultTitleViewBgColor)
+        )
+        mLeftMarginLeft = typedArray.getDimensionPixelSize(R.styleable.TitleView_leftMarginLeft, 0)
+        mLeftMarginRight = typedArray.getDimensionPixelSize(R.styleable.TitleView_leftMarginRight, 0)
+        mRightMarginLeft = typedArray.getDimensionPixelSize(R.styleable.TitleView_rightMarginLeft, 0)
+        mRightMarginRight = typedArray.getDimensionPixelSize(R.styleable.TitleView_rightMarginRight, 0)
         typedArray.recycle()
 
         initView()
     }
 
-    fun initView() {
+    private fun initView() {
         setLeftText()
         setTitleText()
         setRightText()
@@ -78,48 +85,73 @@ class TitleView : Toolbar, View.OnClickListener {
         setLeftDrawable()
         setRightDrawable()
         setTitleDrawable()
+        setTitleViewBgColor()
+        setLeftMargin()
+        setRightMargin()
         setLeftClickListener(this)
         setRightClickListener(this)
         setTitleClickListener(this)
     }
 
-    fun setLeftText() {
+    private fun setLeftText() {
         tv_left_text.text = mLeftText
     }
 
-    fun setTitleText() {
+    private fun setTitleText() {
         tv_title_text.text = mTitleText
     }
 
-    fun setRightText() {
+    private fun setRightText() {
         tv_right_text.text = mRightText
     }
 
-    fun setLeftTextColor() {
+    private fun setLeftTextColor() {
         tv_left_text.setTextColor(mLeftTextColor)
     }
 
-    fun setRightTextColor() {
+    private fun setRightTextColor() {
         tv_right_text.setTextColor(mRightTextColor)
     }
 
-    fun setTitleTextColor() {
+    private fun setTitleTextColor() {
         tv_title_text.setTextColor(mTitleTextColor)
     }
 
-    fun setLeftTextSize() {
+    private fun setTitleViewBgColor() {
+        toolbar.setBackgroundColor(mTitleViewBgColor)
+    }
+
+    private fun setLeftTextSize() {
         tv_left_text.setTextSize(TypedValue.COMPLEX_UNIT_PX, mLeftTextSize.toFloat())
     }
 
-    fun setRightTextSize() {
+    private fun setRightTextSize() {
         tv_right_text.setTextSize(TypedValue.COMPLEX_UNIT_PX, mRightTextSize.toFloat())
     }
 
-    fun setTitleTextSize() {
+    private fun setTitleTextSize() {
         tv_title_text.setTextSize(TypedValue.COMPLEX_UNIT_PX, mTitleTextSize.toFloat())
     }
 
-    fun setLeftDrawable() {
+    private fun setLeftMargin() {
+        val params = tv_left_text.layoutParams
+        if (params is LayoutParams) {
+            params.leftMargin = mLeftMarginLeft
+            params.rightMargin = mLeftMarginRight
+        }
+        tv_left_text.layoutParams = params
+    }
+
+    private fun setRightMargin() {
+        val params = tv_right_text.layoutParams
+        if (params is LayoutParams) {
+            params.leftMargin = mRightMarginLeft
+            params.rightMargin = mRightMarginRight
+        }
+        tv_right_text.layoutParams = params
+    }
+
+    private fun setLeftDrawable() {
         mLeftDrawable?.let {
             mLeftDrawable!!.setBounds(0, 0, mLeftDrawable!!.minimumWidth, mLeftDrawable!!.minimumHeight)
             tv_left_text.setCompoundDrawables(mLeftDrawable, null, null, null)
@@ -127,7 +159,7 @@ class TitleView : Toolbar, View.OnClickListener {
         }
     }
 
-    fun setRightDrawable() {
+    private fun setRightDrawable() {
         mRightDrawable?.let {
             mRightDrawable!!.setBounds(0, 0, mRightDrawable!!.minimumWidth, mRightDrawable!!.minimumHeight)
             tv_right_text.setCompoundDrawables(mRightDrawable, null, null, null)
@@ -135,7 +167,7 @@ class TitleView : Toolbar, View.OnClickListener {
         }
     }
 
-    fun setTitleDrawable() {
+    private fun setTitleDrawable() {
         mTitleDrawable?.let {
             mTitleDrawable!!.setBounds(0, 0, mTitleDrawable!!.minimumWidth, mTitleDrawable!!.minimumHeight)
             tv_title_text.setCompoundDrawables(mTitleDrawable, null, null, null)
@@ -143,15 +175,15 @@ class TitleView : Toolbar, View.OnClickListener {
         }
     }
 
-    fun setLeftClickListener(listener: OnClickListener) {
+    private fun setLeftClickListener(listener: OnClickListener) {
         tv_left_text.setOnClickListener(listener)
     }
 
-    fun setRightClickListener(listener: OnClickListener) {
+    private fun setRightClickListener(listener: OnClickListener) {
         tv_right_text.setOnClickListener(listener)
     }
 
-    fun setTitleClickListener(listener: OnClickListener) {
+    private fun setTitleClickListener(listener: OnClickListener) {
         tv_title_text.setOnClickListener(listener)
     }
 
